@@ -11,7 +11,7 @@ const recvQ = "py_to_ele"
 actButton.addEventListener('click',(event)=> {
     amqp.connect('amqp://localhost', function(err, conn) {
         conn.createChannel(function(err, ch) {
-            var msg = 'Hello World! from electron app';
+            var msg = JSON.stringify({Name: "Sandeep Joshi"});
             q = sendQ
 
             ch.assertQueue(q, {durable: false});

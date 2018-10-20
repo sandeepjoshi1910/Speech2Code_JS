@@ -11,7 +11,7 @@ const recvQ = "py_to_ele"
 actButton.addEventListener('click',(event)=> {
     amqp.connect('amqp://localhost', function(err, conn) {
         conn.createChannel(function(err, ch) {
-            var msg = JSON.stringify({Name: "Sandeep Joshi"});
+            var msg = JSON.stringify({action: "init"});
             q = sendQ
 
             ch.assertQueue(q, {durable: false});
@@ -32,7 +32,8 @@ amqp.connect('amqp://localhost', function(err, conn) {
     console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", q);
     ch.consume(q, function(msg) {
       console.log(" [x] Received %s", msg.content.toString());
-      messagetxt.innerHTML = msg.content.toString();
+      received_msg = JSON.parse(msg);
+      messagetxt.innerHTML = received_msg.status.toString();
     }, {noAck: true});
   });
 });

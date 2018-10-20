@@ -31,9 +31,10 @@ amqp.connect('amqp://localhost', function(err, conn) {
     ch.assertQueue(q, {durable: false});
     console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", q);
     ch.consume(q, function(msg) {
-      console.log(" [x] Received %s", msg.content.toString());
-      received_msg = JSON.parse(msg);
-      messagetxt.innerHTML = received_msg.status.toString();
+      // console.log(typeof msg.content);
+      received_msg = JSON.parse(msg.content);
+      // console.log(typeof received_msg);
+      messagetxt.innerHTML = JSON.parse(received_msg).status;
     }, {noAck: true});
   });
 });

@@ -1,7 +1,7 @@
 {
-    "name": "automaton",
-    "displayName": "bhaunk",
-    "description": "it will bhaunk",
+    "name": "speechtocode",
+    "displayName": "Speech_to_code",
+    "description": "",
     "version": "0.0.1",
     "publisher": "Sandeep",
     "engines": {
@@ -11,7 +11,8 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "onCommand:extension.sayHello",
+        "onCommand:extension.sayMov"
     ],
     "main": "./out/extension",
     "contributes": {
@@ -19,6 +20,10 @@
             {
                 "command": "extension.sayHello",
                 "title": "Hello World"
+            },
+            {
+                "command": "extension.sayMov",
+                "title": "Move Comm"
             }
         ]
     },
@@ -32,12 +37,10 @@
     "devDependencies": {
         "typescript": "^2.6.1",
         "vscode": "^1.1.21",
-        "tslint": "^5.8.0",
         "@types/node": "^8.10.25",
         "@types/mocha": "^2.2.42"
     },
     "dependencies": {
-        "amqplib": "^0.5.2",
-        "axios": "^0.18.0"
+        "amqplib": "^0.5.2"
     }
 }

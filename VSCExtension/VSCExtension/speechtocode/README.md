@@ -1,6 +1,6 @@
-# automaton README
+# speechtocode README
 
-This is the README for your extension "automaton". After writing up a brief description, we recommend including the following sections.
+This is the README for your extension "speechtocode". After writing up a brief description, we recommend including the following sections.
 
 ## Features
 

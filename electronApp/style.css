@@ -1,0 +1,44 @@
+@import '~bootstrap/dist/css/bootstrap.css';
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,400i,700|Raleway');
+
+.gif_container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    text-align: center;
+    align-items: center;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    color: black;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 2.5rem;
+    /* color: #38ffd1; */
+    color: #0fe9b6;
+}
+.button{
+    border: none;
+    border-radius: 7px;
+    background-color: #ffd700;
+    height: 50px;
+    width: 150px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.button:hover {
+    background-color: #fce981;
+}
+
+.body{
+    /* background-color: #161922; */
+    background-image: url(3_patterned_wallpaper.jpg);
+    /* background-position: center; */
+    /* background-repeat: repeat; */
+    background-size: auto;
+}
+
+.for_gif_pos {
+    transition: all 5s;
+}

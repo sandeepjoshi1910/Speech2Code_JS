@@ -12,6 +12,7 @@ actButton.addEventListener('click',(event)=> {
     amqp.connect('amqp://localhost', function(err, conn) {
         conn.createChannel(function(err, ch) {
             var msg = JSON.stringify({action: "init"});
+            console.log(typeof(msg));
             q = sendQ
 
             ch.assertQueue(q, {durable: false});
@@ -19,8 +20,21 @@ actButton.addEventListener('click',(event)=> {
             console.log(" [x] Sent %s", msg);
         });
     });
+    // console.log('Hello!');
+    
+    
 });
 
+$("#SendAction").click(function() {
+  // console.log('In the JQuery function');
+  // $("#gif").fadeOut("fast", function() {
+  // $("#gif").remove();
+  // });
+  $("#gif").remove();
+  
+
+  $(".for_gif_pos").append('<img src="g2-crop-slower.gif" class="gif" id="gif" height="200" width="200" alt="Animated Circles" style="border-radius: 60px; margin: 30px; filter: blur(2.5px);"></img>').fadeIn();
+});
 
 
 
@@ -38,3 +52,12 @@ amqp.connect('amqp://localhost', function(err, conn) {
     }, {noAck: true});
   });
 });
+
+function display_intent() {
+  var sentence = "Create a function called bake with arguments x y z which returns a list"
+}
+
+function startListening() {
+  console.log('In the button function')
+}
+

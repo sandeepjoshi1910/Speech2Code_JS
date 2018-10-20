@@ -21,7 +21,7 @@ h1 {
 .button{
     border: none;
     border-radius: 7px;
-    background-color: #ffd700;
+    background-color: rgb(115, 184, 3);
     height: 50px;
     width: 150px;
     font-family: 'Raleway', sans-serif;
@@ -42,3 +42,4 @@ h1 {
 .for_gif_pos {
     transition: all 5s;
 }
+

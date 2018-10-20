@@ -8,15 +8,15 @@
     <link rel="stylesheet" href="style.css">
     
   </head>
-  <body style="align-content: center; text-align: center;" class = "body">
+  <body style="align-content: center; text-align: center; -webkit-app-region: drag;" class = "body">
     <h1>B  L  U  R  P</h1>
       <p style="font-family: 'Raleway', sans-serif; color: white; font-style:italic; font-size: 12px;">Your go to Voice to Code assistant!</p>
     <!-- Div for GIF, Button and Status-->
     <div class="gif_container" style="height: 300; display: flex; flex-direction: column;">
       <div class="for_gif_pos">
-        <img src="g2-crop.gif" class="gif" id="gif" height="200" width="200" alt="Animated Circles" style="border-radius: 60px; margin: 30px;">
+        <img src="g2-crop.gif" id="gif" height="200" width="200" alt="Animated Circles" style="border-radius: 60px; margin: 30px; opacity:1;">
       </div>
-      <p style="border: black; height:30px; color: white; font-family: 'Raleway', sans-serif; font-size: 0.8rem;">Some Text!</p>
+      <p id="messageBox" style="border: black; height:30px; color: white; font-family: 'Raleway', sans-serif; font-size: 0.8rem;">Some Text!</p>
         
       <button type="button" id="SendAction" class = "button">Press & Speak!(Cmd+K)</button>
     </div>
@@ -38,6 +38,11 @@
     <script>
       // You can also require other files to run in this process
       require('./renderer.js')
+
+      var gif = document.getElementById("gif");
+      document.getElementById("sendAction").addEventListener('click', ()=>{
+
+      });
       
     </script>
     

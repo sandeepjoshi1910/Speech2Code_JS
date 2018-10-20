@@ -2,7 +2,7 @@
 var amqp = require('amqplib/callback_api');
 
 const actButton = document.getElementById('SendAction');
-const messagetxt = document.getElementById('message')
+const messagetxt = document.getElementById('messageBox')
 
 //Queues
 const sendQ = "ele_to_py"
@@ -30,10 +30,17 @@ $("#SendAction").click(function() {
   // $("#gif").fadeOut("fast", function() {
   // $("#gif").remove();
   // });
-  $("#gif").remove();
+  // $("#gif").remove();
+  var elem = document.getElementById("gif");
+  setInterval(function(){
+    elem.style.height-= 2+"px";
+  }, 200);
   
+  // $("#gif").blur(setInterval(function(){
+    
+  // }, 200)
 
-  $(".for_gif_pos").append('<img src="g2-crop-slower.gif" class="gif" id="gif" height="200" width="200" alt="Animated Circles" style="border-radius: 60px; margin: 30px; filter: blur(2.5px);"></img>').fadeIn();
+  // $(".for_gif_pos").append('<img src="g2-crop-slower.gif" class="gif" id="gif" height="200" width="200" alt="Animated Circles" style="border-radius: 60px; margin: 30px; filter: blur(2.5px);"></img>').fadeIn();
 });
 
 
@@ -45,10 +52,16 @@ amqp.connect('amqp://localhost', function(err, conn) {
     ch.assertQueue(q, {durable: false});
     console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", q);
     ch.consume(q, function(msg) {
-      // console.log(typeof msg.content);
+      console.log(typeof msg.content);
       received_msg = JSON.parse(msg.content);
       // console.log(typeof received_msg);
-      messagetxt.innerHTML = JSON.parse(received_msg).status;
+      if(JSON.parse(received_msg).status){
+        messagetxt.innerHTML = JSON.parse(received_msg).status;
+        console.log(JSON.parse(received_msg).status);
+      }
+      else{
+        messagetxt.innerHTML = received_msg.toString();
+      }
     }, {noAck: true});
   });
 });

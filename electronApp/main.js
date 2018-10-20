@@ -7,8 +7,15 @@ let mainWindow
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 500, height: 600})
+  mainWindow = new BrowserWindow({
+    width: 500, 
+    height: 600, 
+    resizable: false,
+    titleBarStyle: 'hidden',
+    vibrancy: "dark"
+  })
 
+  mainWindow.setAlwaysOnTop(true, 'modal-panel');
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
 

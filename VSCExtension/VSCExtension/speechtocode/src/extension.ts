@@ -307,7 +307,7 @@ function get_structured_data(data) {
         codeText = codeText + ' '.repeat(num_spaces) + "except Exception as e:\n";
         codeText = codeText + ' '.repeat(num_spaces+4) + "print(e)\n";
     } else if (dict["action"]=="add_newline") {
-        codeText = codeText + "\n".repeat(parseInt( dict["data"]["args"]["entity"]));
+        codeText = codeText + "\n".repeat(parseInt( dict["data"]["args"]));
     } else if (dict["action"]=="arithmetic") {
         codeText = codeText + dict["data"]["args"]
     } else if (dict["action"]=="print") {
@@ -320,6 +320,7 @@ function get_structured_data(data) {
     return codeText;
 }
 
+{'status': 'NewLine inserted.', 'action': 'add_newline', 'data': {'args': '3', 'type': 'builtin.number'}}
 
 export function terminalSetup() {
     

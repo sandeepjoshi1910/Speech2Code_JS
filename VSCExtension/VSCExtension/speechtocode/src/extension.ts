@@ -7,6 +7,7 @@ var amqp = require('amqplib/callback_api');
 const recvQ = "py_to_ext"
 
 const filePath = vscode.workspace.textDocuments[0]['fileName']
+const ter = vscode.window.createTerminal("myterminal","/bin/zsh")
 
 const selectionTop = (editor: TextEditor) => {
     const lineNumber = editor.selection.start.line;
@@ -30,7 +31,7 @@ const scrollDown = (editor: TextEditor) => {
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-
+    // Setup a terminal
     terminalSetup();
     
 
@@ -224,12 +225,12 @@ function get_structured_data(data) {
                 return codeText;
             } else if (lineNum > currentLine) {
                 // Move the cursor down by positions
-                let positions = lineNum - currentLine + 1;
+                let positions = lineNum - currentLine - 1;
                 console.log(positions);
                 moveTheCursor(positions,"down");
             } else if (lineNum < currentLine) {
                 // Move the cursor up by positions
-                let positions = currentLine - lineNum - 1;
+                let positions = currentLine - lineNum + 1;
                 console.log(positions);
                 moveTheCursor(positions,"up");
             }
@@ -313,16 +314,16 @@ function get_structured_data(data) {
         codeText = codeText + dict["data"]["args"]
     } else if (dict["action"]=="return") {
         codeText = codeText + dict["data"]["args"]
+    } else if (dict["action"]=="run_file") {
+        ter.sendText("python3 "+filePath);
     }
     return codeText;
 }
 
 
 export function terminalSetup() {
-    let ter = vscode.window.createTerminal("myterminal","/bin/zsh")
+    
     ter.show(true);
+    // Activates virtual environment
     ter.sendText("py");
 }
-// {'status': 'class added/created.', 'action': 'add_class', 'data': {'args': [{'entity': 'engine', 'type': 'argument'}, {'entity': 'wheels', 'type': 'argument'}, {'entity': 'car', 'type': 'class_name'}]}}
-
-// {"status": "Function Creation Returned", "action": "add_fun", "data": {"func_name": "x", "args": ["alpha", "beta", "gamma"]}}

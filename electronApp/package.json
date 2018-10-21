@@ -23,6 +23,7 @@
     "amqplib": "^0.5.2",
     "animejs": "^2.2.0",
     "bootstrap": "^4.1.3",
+    "howler": "^2.0.15",
     "package.json": "^2.0.1"
   }
 }

@@ -104,7 +104,7 @@ h1 {
     margin: 0 auto;
     letter-spacing: 0.20em;
     animation:
-        typing 7.5s steps(40, end),
+        typing 1.5s steps(40, end),
         blink-caret .55s step-end infinite;
 }
 

@@ -75,3 +75,13 @@ function startListening() {
 }
 
 $("#blurp_des").addClass('animated jello');
+
+window.addEventListener('load', function() {
+  console.log('All page elements have been loaded.');
+  var audioClip = new Howl({
+    src: ['s2c_mp3/welcome.mp3']
+  });
+  audioClip.play();
+  console.log('After audio clip');
+
+});

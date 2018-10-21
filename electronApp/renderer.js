@@ -90,13 +90,14 @@ window.addEventListener('load', function() {
     src: ['s2c_mp3/welcome.mp3']
   });
   audioClip.play();
+
   console.log('After audio clip');
 
 });
 
 function play_audio(action_name) {
   var audioClip = new Howl({
-    src: ['s2c_mp3/'+action_name+'.mp3']
+    src: ['s2c_mp3/'+action_name]
   });
   audioClip.play();
 }

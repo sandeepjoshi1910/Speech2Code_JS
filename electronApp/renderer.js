@@ -2,6 +2,7 @@
 var amqp = require('amqplib/callback_api');
 
 const actButton = document.getElementById('SendAction');
+const actButton2 = document.getElementById('SendAction2');
 const messagetxt = document.getElementById('messageBox')
 
 //Queues
@@ -24,6 +25,20 @@ actButton.addEventListener('click',(event)=> {
     
     
 });
+
+actButton2.addEventListener('click', (event)=> {
+  amqp.connect('amqp://localhost', function(err, conn) {
+    conn.createChannel(function(err, ch) {
+      var msg = JSON.stringify({action: "init_freeflow"});
+      console.log(typeof(msg))
+      q = sendQ
+
+      ch.assertQueue(q, {durable: false});
+      ch.sendToQueue(q, Buffer.from(msg));
+      console.log(" [x] Sent %s", msg);
+    })
+  })
+})
 
 $("#SendAction").click(function() {
   // console.log('In the JQuery function');

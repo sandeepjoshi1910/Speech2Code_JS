@@ -5,33 +5,36 @@
     <title>Blurp</title>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script> -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animate.css">
     
   </head>
   <body style="align-content: center; text-align: center; -webkit-app-region: drag;" class = "body">
-    <h1>B  L  U  R  P</h1>
-      <p style="font-family: 'Raleway', sans-serif; color: white; font-style:italic; font-size: 12px;">Your go to Voice to Code assistant!</p>
+    <h1 id="blurp_des" class="blurp_des">BLURP</h1>
+      <p id="tagline" class="tagline" style="font-family: 'Raleway', sans-serif; color: white; font-style:italic; font-size: 12px;">Your Go to Voice to Code Assistant!</p>
     <!-- Div for GIF, Button and Status-->
-    <div class="gif_container" style="height: 300; display: flex; flex-direction: column;">
+    <div class="gif_container" style="padding-top: 15px">
       <div class="for_gif_pos">
-        <img src="g2-crop.gif" id="gif" height="200" width="200" alt="Animated Circles" style="border-radius: 60px; margin: 30px; opacity:1;">
+        <img src="aspect-ratio-gif-crop.gif" id="gif" height="200" width="200" alt="Animated Circles" style="border-radius: 35px; margin: 10px; opacity:1;">
+        <!-- <img src="g2-crop.gif" id="gif" height="200" width="200" alt="Animated Circles" style="border-radius: 35px; margin: 10px; opacity:1;"> -->
       </div>
       <p id="messageBox" style="border: black; height:30px; color: white; font-family: 'Raleway', sans-serif; font-size: 0.8rem;">Some Text!</p>
         
-      <button type="button" id="SendAction" class = "button">Press & Speak!(Cmd+K)</button>
+      <button type="button" id="SendAction" class = "button">Press & Speak! (Cmd+K)</button>
     </div>
     
     <!-- Div for Intents-->
     <div class="intents_container" style="border: black; height:30px; color: white; font-family: 'Raleway', sans-serif; font-size: 0.8rem;">
-      <p>Is this what you meant?</p>
-
-      
-      
-
-
-
+      <h5 class="h5" id="h5" style="font-family: 'Raleway', sans-serif; color: white; font-size: 12px;">
+        Powered By<br><br>
+        <a href="https://azure.microsoft.com/en-us/" target="_blank">Microsoft Azure </a> | <a href="https://www.luis.ai/" target="_blank">Microsoft LUIS </a> | <a href="https://cloud.google.com/" target="_blank">Google Cloud </a> | <a href="https://www.rabbitmq.com/" target="_blank">RabbitMQ </a><br><br>
+        Made at HackHarvard 2018 
+      </h5>
     </div>
     <br>
+    
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- <p1 id="message">Awaiting message</p1> -->
 
@@ -39,10 +42,10 @@
       // You can also require other files to run in this process
       require('./renderer.js')
 
-      var gif = document.getElementById("gif");
-      document.getElementById("sendAction").addEventListener('click', ()=>{
+      // var gif = document.getElementById("gif");
+      // document.getElementById("sendAction").addEventListener('click', ()=>{
 
-      });
+      // });
       
     </script>
     

@@ -1,4 +1,4 @@
-
+// import { strictEqual } from 'assert';
 var amqp = require('amqplib/callback_api');
 
 const actButton = document.getElementById('SendAction');
@@ -74,3 +74,4 @@ function startListening() {
   console.log('In the button function')
 }
 
+$("#blurp_des").addClass('animated jello');

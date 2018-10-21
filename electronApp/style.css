@@ -11,6 +11,27 @@
     color: black;
 }
 
+.tagline {
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: 0.20em;
+    animation:
+        typing 7.5s steps(40, end),
+        blink-caret .55s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0}
+    to { width: 100% }
+
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% {border-color: yellow; }
+}
+
 h1 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
@@ -25,6 +46,9 @@ h1 {
     height: 50px;
     width: 150px;
     font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    color: rgb(213, 240, 236);
 }
 
 .button:hover {
@@ -43,3 +67,22 @@ h1 {
     transition: all 5s;
 }
 
+.blurp_des {
+    font-size: 1.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.5em;
+    font-weight: 800;
+}
+
+.blurp_des .letter {
+    display: inline-block;
+    line-height: 1em;
+
+}
+
+
+
+.h5 a {
+    text-decoration: none;
+    color: white;
+}

@@ -81,46 +81,46 @@ amqp.connect('amqp://localhost', function(err, conn) {
         else if (action_name == 'Function Creation Returned') {
           play_audio('add_function.mp3');
         }
-        else if (action_name.ignoreCase == 'if-else Block Created') {
+        else if (action_name == 'if-else Block Created') {
           play_audio('add_if_else.mp3');
         }
-        else if (action_name.ignoreCase == 'Main Function Created') {
+        else if (action_name == 'Main Function Created') {
           play_audio('add_main.mp3');
         }
-        else if (action_name.ignoreCase == 'While statement added.') {
+        else if (action_name == 'While statement added.') {
           play_audio('add_while.mp3');
         }
-        else if (action_name.ignoreCase == 'Go to line/function called.') {
+        else if (action_name == 'Go to line/function called.') {
           play_audio('goto.mp3');
         }
-        else if (action_name.ignoreCase == 'Function called.') {
+        else if (action_name == 'Function called.') {
           play_audio('call_function.mp3');
         }
-        else if (action_name.ignoreCase == 'Variable added.') {
+        else if (action_name == 'Variable added.') {
           play_audio('add_variables.mp3');
         }
-        else if (action_name.ignoreCase == 'Breakpoint added.') {
+        else if (action_name == 'Breakpoint added.') {
           play_audio('create_breakpoint.mp3');
         }
-        else if (action_name.ignoreCase == 'class added/created.') {
+        else if (action_name == 'class added/created.') {
           play_audio('add_class.mp3');
         }
-        else if (action_name.ignoreCase == 'NewLine inserted.') {
+        else if (action_name == 'NewLine inserted.') {
           play_audio('add_newline.mp3');
         }
-        else if (action_name.ignoreCase == 'Exception Handling block added.') {
+        else if (action_name == 'Exception Handling block added.') {
           play_audio('add_try_catch.mp3');
         }
-        else if (action_name.ignoreCase == 'Line Removed') {
+        else if (action_name == 'Line Removed') {
           play_audio('delete_line.mp3');
         }
-        else if (action_name.ignoreCase == 'Running script') {
+        else if (action_name == 'Running script') {
           play_audio('run_file.mp3');
         }
-        else if (action_name.ignoreCase == 'Changes reverted back (Undo).') {
+        else if (action_name == 'Changes reverted back (Undo).') {
           play_audio('undo_changes.mp3');
         }
-        else if (action_name.ignoreCase == 'Invalid query') {
+        else if (action_name == 'Invalid query') {
           play_audio('invalid.mp3');
         }
       }

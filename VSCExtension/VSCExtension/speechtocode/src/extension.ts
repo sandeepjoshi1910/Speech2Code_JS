@@ -307,6 +307,12 @@ function get_structured_data(data) {
         codeText = codeText + ' '.repeat(num_spaces+4) + "print(e)\n";
     } else if (dict["action"]=="add_newline") {
         codeText = codeText + "\n".repeat(parseInt( dict["data"]["args"]["entity"]));
+    } else if (dict["action"]=="arithmetic") {
+        codeText = codeText + dict["data"]["args"]
+    } else if (dict["action"]=="print") {
+        codeText = codeText + dict["data"]["args"]
+    } else if (dict["action"]=="return") {
+        codeText = codeText + dict["data"]["args"]
     }
     return codeText;
 }

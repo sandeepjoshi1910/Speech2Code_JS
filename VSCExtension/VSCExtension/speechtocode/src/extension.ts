@@ -6,6 +6,8 @@ import * as vscode from 'vscode';
 var amqp = require('amqplib/callback_api');
 const recvQ = "py_to_ext"
 
+const filePath = vscode.workspace.textDocuments[0]['fileName']
+
 const selectionTop = (editor: TextEditor) => {
     const lineNumber = editor.selection.start.line;
     vscode.commands.executeCommand('revealLine', { lineNumber, at: 'top' })
@@ -29,7 +31,7 @@ const scrollDown = (editor: TextEditor) => {
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 
-
+    terminalSetup();
     
 
     // Use the console to output diagnostic information (console.log) and errors (console.error)
@@ -57,9 +59,13 @@ export function activate(context: vscode.ExtensionContext) {
     // The commandId parameter must match the command field in package.json
     let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
         // The code you place here will be executed every time your command is executed
-
+        
         
         // console.log(vscode.window.activeTextEditor.options);
+        
+        console.log("save action")
+
+                    
         console.log(vscode.window.activeTextEditor.selection.active.character);
         var editor = vscode.window.activeTextEditor;
         if (!editor) {
@@ -79,11 +85,10 @@ export function activate(context: vscode.ExtensionContext) {
                 console.log(msg);
                 editor.edit( (edit) => {
                     const pos = editor.selection.active;
-                    console.log("Message received");
+                    console.log(JSON.parse(msg.content).toString());
                     // edit.insert(pos, JSON.parse(msg.content).toString()+"\n" );
                     edit.insert(pos, get_structured_data(JSON.parse(msg.content).toString()) );
-                    
-                    
+
                     
                 });
             }, {noAck: true});
@@ -99,6 +104,8 @@ export function activate(context: vscode.ExtensionContext) {
         
     });
 
+    
+    // vscode.window.activeTextEditor.document.getText(vscode.)
     
     
 
@@ -167,6 +174,7 @@ export function scrollUpPage(): void {
 function get_structured_data(data) {
     let dict = JSON.parse(data);
     var codeText = "";
+    console.log(dict);
     let num_spaces = vscode.window.activeTextEditor.selection.active.character
     if (dict["action"] == "add_fun") {
         codeText = codeText + "def ";
@@ -257,8 +265,64 @@ function get_structured_data(data) {
         inits = inits.slice(0,-1);
 
         codeText = vrs+" = "+inits;
+    } else if (dict["action"]=="add_breakpoint") {
+        const line = vscode.window.activeTextEditor.selection.start.line;
+        const uri = vscode.window.activeTextEditor.document.uri;
+        const pos = new vscode.Position(line, 0);
+        const loc = new vscode.Location(uri, pos);
+        const breakpoint = new vscode.SourceBreakpoint(loc, true);
+        vscode.debug.addBreakpoints([breakpoint]);
+        codeText = "";
+    } else if (dict["action"]=="add_class") {
+        var cls:string = "class ";
+        var ars: string= "(self,";
+        var args : string[] = [];
+        dict["data"]["args"].forEach(element => {
+            if (element['type'] == "argument") {
+                ars = ars + element["entity"] + ",";
+                args.push(element["entity"]);
+            } else {
+                cls = cls + element["entity"] + ":"
+                
+            }
+        });
+
+        ars = ars.slice(0,-1) + "):";
+
+        codeText = codeText + cls + "\n";
+        codeText = codeText + ' '.repeat(num_spaces+4)
+        codeText = codeText + "def __init__" + ars + ":\n";
+        args.forEach(element => {
+            codeText = codeText + ' '.repeat(num_spaces+8)
+            codeText = codeText + "self."+element+" = "+element+"\n";
+        });
+
+        console.log(codeText);
+    } else if (dict["action"]=="save_file"){
+        vscode.window.activeTextEditor.document.save();
+    } else if (dict["action"]=="add_try_catch") {
+        codeText = codeText + "try:\n";
+        codeText = codeText + ' '.repeat(num_spaces+4) + "pass\n";
+        codeText = codeText + ' '.repeat(num_spaces) + "except Exception as e:\n";
+        codeText = codeText + ' '.repeat(num_spaces+4) + "print(e)\n";
+    } else if (dict["action"]=="add_newline") {
+        codeText = codeText + "\n".repeat(parseInt( dict["data"]["args"]["entity"]));
+    } else if (dict["action"]=="arithmetic") {
+        codeText = codeText + dict["data"]["args"]
+    } else if (dict["action"]=="print") {
+        codeText = codeText + dict["data"]["args"]
+    } else if (dict["action"]=="return") {
+        codeText = codeText + dict["data"]["args"]
     }
     return codeText;
 }
+
+
+export function terminalSetup() {
+    let ter = vscode.window.createTerminal("myterminal","/bin/zsh")
+    ter.show(true);
+    ter.sendText("py");
+}
+// {'status': 'class added/created.', 'action': 'add_class', 'data': {'args': [{'entity': 'engine', 'type': 'argument'}, {'entity': 'wheels', 'type': 'argument'}, {'entity': 'car', 'type': 'class_name'}]}}
 
 // {"status": "Function Creation Returned", "action": "add_fun", "data": {"func_name": "x", "args": ["alpha", "beta", "gamma"]}}

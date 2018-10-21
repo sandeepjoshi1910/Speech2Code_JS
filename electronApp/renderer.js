@@ -59,7 +59,7 @@ amqp.connect('amqp://localhost', function(err, conn) {
         messagetxt.innerHTML = JSON.parse(received_msg).status;
         var action_name = JSON.parse(received_msg).status;
         console.log(action_name);
-        if(action_name.slice(0, 11) == 'Saved script') {
+        if(action_name == 'Saved script.') {
           console.log('Saved Script encountered. Playing audio...');
           play_audio('save_file.mp3')
         }

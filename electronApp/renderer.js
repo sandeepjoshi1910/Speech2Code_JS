@@ -74,6 +74,55 @@ amqp.connect('amqp://localhost', function(err, conn) {
         messagetxt.innerHTML = JSON.parse(received_msg).status;
         var action_name = JSON.parse(received_msg).status;
         console.log(action_name);
+        if(action_name == 'Saved script.') {
+          console.log('Saved Script encountered. Playing audio...');
+          play_audio('save_file.mp3')
+        }
+        else if (action_name == 'Function Creation Returned') {
+          play_audio('add_function.mp3');
+        }
+        else if (action_name.ignoreCase == 'if-else Block Created') {
+          play_audio('add_if_else.mp3');
+        }
+        else if (action_name.ignoreCase == 'Main Function Created') {
+          play_audio('add_main.mp3');
+        }
+        else if (action_name.ignoreCase == 'While statement added.') {
+          play_audio('add_while.mp3');
+        }
+        else if (action_name.ignoreCase == 'Go to line/function called.') {
+          play_audio('goto.mp3');
+        }
+        else if (action_name.ignoreCase == 'Function called.') {
+          play_audio('call_function.mp3');
+        }
+        else if (action_name.ignoreCase == 'Variable added.') {
+          play_audio('add_variables.mp3');
+        }
+        else if (action_name.ignoreCase == 'Breakpoint added.') {
+          play_audio('create_breakpoint.mp3');
+        }
+        else if (action_name.ignoreCase == 'class added/created.') {
+          play_audio('add_class.mp3');
+        }
+        else if (action_name.ignoreCase == 'NewLine inserted.') {
+          play_audio('add_newline.mp3');
+        }
+        else if (action_name.ignoreCase == 'Exception Handling block added.') {
+          play_audio('add_try_catch.mp3');
+        }
+        else if (action_name.ignoreCase == 'Line Removed') {
+          play_audio('delete_line.mp3');
+        }
+        else if (action_name.ignoreCase == 'Running script') {
+          play_audio('run_file.mp3');
+        }
+        else if (action_name.ignoreCase == 'Changes reverted back (Undo).') {
+          play_audio('undo_changes.mp3');
+        }
+        else if (action_name.ignoreCase == 'Invalid query') {
+          play_audio('invalid.mp3');
+        }
       }
       else{
         messagetxt.innerHTML = received_msg.toString();
@@ -98,6 +147,14 @@ window.addEventListener('load', function() {
     src: ['s2c_mp3/welcome.mp3']
   });
   audioClip.play();
+
   console.log('After audio clip');
 
 });
+
+function play_audio(action_name) {
+  var audioClip = new Howl({
+    src: ['s2c_mp3/'+action_name]
+  });
+  audioClip.play();
+}

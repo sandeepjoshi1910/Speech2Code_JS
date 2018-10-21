@@ -311,9 +311,9 @@ function get_structured_data(data) {
     } else if (dict["action"]=="arithmetic") {
         codeText = codeText + dict["data"]["args"]
     } else if (dict["action"]=="print") {
-        codeText = codeText + dict["data"]["args"]
+        codeText = codeText + "print("+dict["data"]["args"][0]+")"
     } else if (dict["action"]=="return") {
-        codeText = codeText + dict["data"]["args"]
+        codeText = codeText + "return "+dict["data"]["args"][0]
     } else if (dict["action"]=="run_file") {
         ter.sendText("python3 "+filePath);
     }

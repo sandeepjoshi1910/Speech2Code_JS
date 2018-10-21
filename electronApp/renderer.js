@@ -57,7 +57,8 @@ amqp.connect('amqp://localhost', function(err, conn) {
       // console.log(typeof received_msg);
       if(JSON.parse(received_msg).status){
         messagetxt.innerHTML = JSON.parse(received_msg).status;
-        console.log(JSON.parse(received_msg).status);
+        var action_name = JSON.parse(received_msg).status;
+        console.log(action_name);
       }
       else{
         messagetxt.innerHTML = received_msg.toString();

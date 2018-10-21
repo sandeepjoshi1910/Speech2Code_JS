@@ -59,6 +59,13 @@ amqp.connect('amqp://localhost', function(err, conn) {
         messagetxt.innerHTML = JSON.parse(received_msg).status;
         var action_name = JSON.parse(received_msg).status;
         console.log(action_name);
+        if(action_name.slice(0, 11) == 'Saved script') {
+          console.log('Saved Script encountered. Playing audio...');
+          play_audio('save_file.mp3')
+        }
+        else if (action_name == 'Function Creation Returned') {
+          play_audio('add_function.mp3');
+        }
       }
       else{
         messagetxt.innerHTML = received_msg.toString();
@@ -86,3 +93,10 @@ window.addEventListener('load', function() {
   console.log('After audio clip');
 
 });
+
+function play_audio(action_name) {
+  var audioClip = new Howl({
+    src: ['s2c_mp3/'+action_name+'.mp3']
+  });
+  audioClip.play();
+}

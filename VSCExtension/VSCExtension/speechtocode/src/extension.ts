@@ -186,7 +186,7 @@ function get_structured_data(data) {
             codeText = codeText + element + ",";
         });
         codeText = codeText.slice(0,-1);
-        codeText = codeText + "):"
+        codeText = codeText + "):\n";
     } else if(dict["action"]=="add_if_else") {
 
 
@@ -208,11 +208,11 @@ function get_structured_data(data) {
         codeText = codeText + ' '.repeat(num_spaces+4)
         codeText = codeText + "except Exception:\n";
         codeText = codeText + ' '.repeat(num_spaces+8);
-        codeText = codeText + "print(traceback.format_exc())";
+        codeText = codeText + "print(traceback.format_exc())\n";
 
     } else if (dict["action"] == "add_while") {
 
-        codeText = "while ():\n\tpass";
+        codeText = "while ():\n\tpass\n";
 
     } else if (dict["action"] == "goto") {
 
@@ -252,7 +252,7 @@ function get_structured_data(data) {
         });
         
         ars = ars.slice(0,-1);
-        ars = ars + ")";
+        ars = ars + ")\n";
         codeText = fun+ars;
 
     } else if (dict["action"] == "add_variable") {
@@ -265,7 +265,7 @@ function get_structured_data(data) {
         vrs = vrs.slice(0,-1);
         inits = inits.slice(0,-1);
 
-        codeText = vrs+" = "+inits;
+        codeText = vrs+" = "+inits+"\n";
     } else if (dict["action"]=="add_breakpoint") {
         const line = vscode.window.activeTextEditor.selection.start.line;
         const uri = vscode.window.activeTextEditor.document.uri;
@@ -309,18 +309,18 @@ function get_structured_data(data) {
     } else if (dict["action"]=="add_newline") {
         codeText = codeText + "\n".repeat(parseInt( dict["data"]["args"]));
     } else if (dict["action"]=="arithmetic") {
-        codeText = codeText + dict["data"]["args"]
+        codeText = codeText + dict["data"]["args"]+"\n"
     } else if (dict["action"]=="print") {
-        codeText = codeText + "print("+dict["data"]["args"][0]+")"
+        codeText = codeText + "print("+dict["data"]["args"][0]+")\n"
     } else if (dict["action"]=="return") {
-        codeText = codeText + "return "+dict["data"]["args"][0]
+        codeText = codeText + "return "+dict["data"]["args"][0]+"\n"
     } else if (dict["action"]=="run_file") {
         ter.sendText("python3 "+filePath);
     }
     return codeText;
 }
 
-{'status': 'NewLine inserted.', 'action': 'add_newline', 'data': {'args': '3', 'type': 'builtin.number'}}
+// {'status': 'NewLine inserted.', 'action': 'add_newline', 'data': {'args': '3', 'type': 'builtin.number'}}
 
 export function terminalSetup() {
     
